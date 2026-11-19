@@ -1,0 +1,39 @@
+# Track only files directly needed to maintain and build the website.
+/*
+!/.gitignore
+!/README.md
+!/package.json
+!/package-lock.json
+!/src/
+!/src/**
+!/public/
+!/public/**
+!/scripts/
+!/scripts/**
+
+# Exclude agent instructions and skills even inside allowed directories.
+AGENTS.md
+SKILL.md
+CLAUDE.md
+.agent/
+.agents/
+.claude/
+.codex/
+.cursor/
+.gemini/
+.impeccable/
+.openai/
+skills/
+
+# Local generation records and machine-specific/build artifacts.
+*.webp.json
+*.png.json
+*.jpg.json
+*.jpeg.json
+.DS_Store
+node_modules/
+dist/
+.local-archive/
+.env
+.env.*
+
