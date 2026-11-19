@@ -14,3 +14,23 @@
 @media(min-width:701px){.inspection h1{line-height:.8;padding-block:0 4px}.hero-statement{padding-block:2px 3px}.hero-action{padding-bottom:12px}}
 
 @media(max-width:700px){.service-index-layout{grid-template-columns:minmax(0,1fr)}.service-index-layout>*{min-width:0}.service-index-layout>.section-heading{font-size:clamp(28px,9.2vw,36px)}}
+
+.footer-bottom>.footer-credit:last-child{flex:0 0 32ch;max-width:32ch;line-height:1.6}.footer-credit>span{display:block}.footer-credit strong{display:inline-block;white-space:nowrap;font-size:1.125rem;font-weight:850;text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:4px;text-underline-offset:4px}@media(max-width:700px){.footer-bottom>.footer-credit:last-child{max-width:none;margin-top:22px;text-align:left}}
+
+/* The opening scene fills the viewport together with the navigation. */
+.opening-hero{min-height:calc(100vh - var(--header-height,94px));min-height:calc(100svh - var(--header-height,94px));display:flex;flex-direction:column}
+.inspection.opening-hero>h1,.inspection.opening-hero>.hero-statement,.inspection.opening-hero>.hero-action{flex-shrink:0}
+.inspection.opening-hero>.inspection-image{flex:1 0 clamp(220px,30svh,440px);height:auto;min-height:220px}
+.inspection.opening-hero>.inspection-image>img{position:absolute;inset:0}
+.hero-scroll{display:flex;align-items:center;justify-content:center;align-self:center;flex:0 0 48px;width:48px;min-height:48px;margin:8px auto 16px;color:var(--ink);border-radius:50%;text-decoration:none}
+.hero-scroll:hover{background:rgba(36,40,39,.08)}
+.hero-scroll svg{animation:hero-chevron-bounce 2.4s ease-in-out infinite}
+.hero-scroll:hover svg,.hero-scroll:focus-visible svg{animation-play-state:paused}
+@keyframes hero-chevron-bounce{0%,25%,65%,100%{transform:translateY(0)}45%{transform:translateY(6px)}55%{transform:translateY(2px)}}
+@media(max-width:700px){.opening-hero{--header-height:86px}.inspection.opening-hero>.inspection-image{flex-basis:clamp(220px,35svh,370px)}}
+@media(prefers-reduced-motion:reduce){.hero-scroll svg{animation:none}}
+
+.water-ripples{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}.inspection-image>.comparison-controls{z-index:2}@media(prefers-reduced-motion:reduce){.water-ripples{display:none}}
+
+.water-surface{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}.inspection-image>.comparison-controls{z-index:2}
+@media(prefers-reduced-motion:reduce){.water-surface{display:none}}

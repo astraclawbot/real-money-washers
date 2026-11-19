@@ -8,6 +8,7 @@ const pages = [
   ['index', 'home', 'Real Money Washers — Clean money. Measured precisely.', 'Physical banknote washing, coin polishing, and an unreasonable attention to detail. Explore a fictional currency-cleaning institute.'],
   ['about', 'about', 'About Us — Real Money Washers', 'Meet the fictional institute with an excessive commitment to the condition of your currency.'],
   ['services', 'services', 'Services — Real Money Washers', 'Banknote washing, coin polishing, and bulk cash care. Explore the treatments and illustrative prices.'],
+  ['submission', 'submission', 'Project Submission — Real Money Washers', 'Static website assessment: architecture, AWS infrastructure evidence, security, challenges, and lessons learned.'],
   ['contact', 'contact', 'Request a Wash — Real Money Washers', 'Create your fictional currency wash request and collection receipt, entirely in your browser.']
 ];
 const header = await readFile(path.join(src, 'header.html'), 'utf8');
@@ -15,8 +16,8 @@ const footer = await readFile(path.join(src, 'footer.html'), 'utf8');
 await rm(out, { recursive: true, force: true });
 await mkdir(path.join(out, 'assets'), { recursive: true });
 await cp(path.join(root, 'public'), out, { recursive: true, filter: p => !p.endsWith('.json') });
-for (const style of ['styles.css', 'pages.css']) await cp(path.join(src, style), path.join(out, 'assets', style));
-for (const script of ['main.js', 'contact.js']) await cp(path.join(src, script), path.join(out, 'assets', script));
+for (const style of ['styles.css', 'pages.css', 'submission.css']) await cp(path.join(src, style), path.join(out, 'assets', style));
+for (const script of ['main.js', 'contact.js', 'submission.js', 'water.js']) await cp(path.join(src, script), path.join(out, 'assets', script));
 const esc = value => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
 for (const [name, key, title, description] of pages) {
   const content = await readFile(path.join(src, 'pages', name + '.html'), 'utf8');
@@ -36,6 +37,8 @@ for (const [name, key, title, description] of pages) {
 <link rel="stylesheet" href="assets/styles.css">
 <link rel="stylesheet" href="assets/pages.css">
 <script src="assets/main.js" defer></script>
+${key === 'home' ? '<script src="assets/water.js" defer></script>' : ''}
+${key === 'submission' ? '<link rel="stylesheet" href="assets/submission.css"><script src="assets/submission.js" defer></script>' : ''}
 ${key === 'contact' ? '<script src="assets/contact.js" defer></script>' : ''}
 </head>
 <body class="page-${key}">
@@ -48,5 +51,5 @@ ${footer}
   await writeFile(path.join(out, name + '.html'), html);
 }
 await writeFile(path.join(out, '404.html'), `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Specimen not found — Real Money Washers</title><link rel="stylesheet" href="assets/styles.css"><link rel="stylesheet" href="assets/pages.css"><link rel="icon" href="assets/favicon.svg"></head><body><main id="main-content" class="container page-intro"><h1>Specimen not found.</h1><p>This page appears to have gone through the wash. Return to the institute and begin again.</p><a class="button" href="index.html">Return home</a></main></body></html>`);
-console.log('Built 4 pages and a 404 page in dist/.');
+console.log(`Built ${pages.length} pages and a 404 page in dist/.`);
 
